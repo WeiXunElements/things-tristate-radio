@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <!--
-`<things-tristate-radio>` Things Date Picker
+`<things-tristate-radio>` Things Tristate Radio
 
   Example
     
@@ -15,9 +15,10 @@
 <template>
   <label>[[label]]</label>
   true
-  <input type="radio" name="trueBtn" checked="[[isTrue]]" on-tap="trueChecked">
+  <input type="radio" checked="[[isTrue]]" on-tap="trueChecked">
   false
-  <input type="radio" name="falseBtn" checked="[[isFalse]]" on-tap="falseChecked">
+  <input type="radio" checked="[[isFalse]]" on-tap="falseChecked">
+  <input name="[[name]]" value="[[value]]" hidden>
 </template>
 
 <script>
@@ -49,17 +50,17 @@
       },
 
       /**
-       * 최종적인 tristate-radio의 value
+       * 최종적으로 계산되는 return value
        */
-      returnValue: {
-        type: Boolean,
+      value: {
+        type: Boolean
       }
     },
 
     /**
      * true 영역의 radio button 클릭시 발생
      * false 영역의 버튼이 채크 되었다면 채크를 해제하고 true 버튼을 채크
-     * calcReturnValue를 호출하여 returnValue를 계산한다.
+     * calcReturnValue를 호출하여 value를 계산한다.
      */
     trueChecked: function() {
       if(this.isFalse) this.isFalse = false;
@@ -71,7 +72,7 @@
     /**
      * false 영역의 radio button 클릭시 발생
      * true 영역의 버튼이 채크 되었다면 채크를 해제하고 false 버튼을 채크
-     * calcReturnValue를 호출하여 returnValue를 계산한다.
+     * calcReturnValue를 호출하여 value를 계산한다.
      */
     falseChecked: function() {
       if(this.isTrue) this.isTrue = false;
@@ -81,15 +82,15 @@
     },
 
     /**
-     * true, false 버튼중 어느 것이 채크 되었는지 확인하고 둘다 채크 되지 않았을때 undefined으로 초기화
+     * true, false 버튼중 어느 것이 채크 되었는지 확인하고 둘다 채크 되지 않았을때 null로 초기화
      */
     calcReturnValue: function(trueBtn, falseBtn) {
       if(trueBtn) {
-        this.returnValue = true;
+        this.value = true;
       } else if (falseBtn) {
-        this.returnValue = false; 
+        this.value = false; 
       } else {
-        this.returnValue = undefined;
+        this.value = null;
       }
     }
   })

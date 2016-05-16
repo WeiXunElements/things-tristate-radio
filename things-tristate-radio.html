@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <!--
-`<things-tristate-radio>` Things Tristate Radio
+`<things-tristate-radio>` Things Date Picker
 
   Example
     
@@ -12,87 +12,121 @@
 @demo demo/index.html
 -->
 <dom-module is="things-tristate-radio">
-<template>
-  <label>[[label]]</label>
-  true
-  <input type="radio" checked="[[isTrue]]" on-tap="trueChecked">
-  false
-  <input type="radio" checked="[[isFalse]]" on-tap="falseChecked">
-  <input name="[[name]]" value="[[value]]" hidden>
-</template>
-
-<script>
-  Polymer({
-    is: 'things-tristate-radio',
-
-    properties: {
-      /**
-       * label property
-       */
-      label: {
-        type: String
-      },
-
-      /**
-       * true 영역의 button이 클릭 되었는지 여부
-       */
-      isTrue: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * false 영역의 button이 클릭 되었는지 여부
-       */
-      isFalse: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * 최종적으로 계산되는 return value
-       */
-      value: {
-        type: Boolean
-      }
-    },
-
-    /**
-     * true 영역의 radio button 클릭시 발생
-     * false 영역의 버튼이 채크 되었다면 채크를 해제하고 true 버튼을 채크
-     * calcReturnValue를 호출하여 value를 계산한다.
-     */
-    trueChecked: function() {
-      if(this.isFalse) this.isFalse = false;
-
-      this.isTrue = !this.isTrue;
-      this.calcReturnValue(this.isTrue, this.isFalse);
-    },
-
-    /**
-     * false 영역의 radio button 클릭시 발생
-     * true 영역의 버튼이 채크 되었다면 채크를 해제하고 false 버튼을 채크
-     * calcReturnValue를 호출하여 value를 계산한다.
-     */
-    falseChecked: function() {
-      if(this.isTrue) this.isTrue = false;
-
-      this.isFalse = !this.isFalse;
-      this.calcReturnValue(this.isTrue, this.isFalse);
-    },
-
-    /**
-     * true, false 버튼중 어느 것이 채크 되었는지 확인하고 둘다 채크 되지 않았을때 null로 초기화
-     */
-    calcReturnValue: function(trueBtn, falseBtn) {
-      if(trueBtn) {
-        this.value = true;
-      } else if (falseBtn) {
-        this.value = false; 
-      } else {
-        this.value = null;
-      }
+  <style>
+    label{
+      @apply(--things-label);
     }
-  })
-</script>
+  </style>
+  <template>
+    <label>[[label]]</label>
+    true
+    <input type="radio" checked="[[isTrue]]" on-tap="trueChecked">
+    false
+    <input type="radio" checked="[[isFalse]]" on-tap="falseChecked">
+    ignore
+    <input type="radio" checked="[[isIgnore]]" on-tap="ignoreChecked">
+
+    <input name="[[name]]" value="[[value]]" hidden>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'things-tristate-radio',
+
+      properties: {
+        /**
+         * label property
+         */
+        label: {
+          type: String
+        },
+
+        /**
+         * true 영역의 button이 클릭 되었는지 여부
+         */
+        isTrue: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * false 영역의 button이 클릭 되었는지 여부
+         */
+        isFalse: {
+          type: Boolean,
+          value: false
+        },
+
+        isIgnore: {
+          type: Boolean,
+          value: true
+        },
+
+        value: {
+          type: Boolean
+        }
+      },
+
+      /**
+       * true 영역의 radio button 클릭시 발생
+       * false or ignore 영역의 버튼이 채크 되었다면 채크를 해제하고 true 버튼을 채크
+       * calcReturnValue를 호출하여 value를 계산한다.
+       */
+      trueChecked: function() {
+        if(this.isFalse) {
+          this.isFalse = false;
+        } else if (this.isIgnore) {
+          this.isIgnore = false;
+        }
+
+        this.isTrue = true;
+        this.calcValue(this.isTrue, this.isFalse, this.isIgnore);
+      },
+
+      /**
+       * false 영역의 radio button 클릭시 발생
+       * true or ignore 영역의 버튼이 채크 되었다면 채크를 해제하고 false 버튼을 채크
+       * calcValue를 호출하여 value를 계산한다.
+       */
+      falseChecked: function() {
+        if(this.isTrue) {
+          this.isTrue = false;
+        } else if (this.isIgnore) {
+          this.isIgnore = false;
+        }
+
+        this.isFalse = true;
+        this.calcValue(this.isTrue, this.isFalse, this.isIgnore);
+      },
+
+      /**
+       * ignore 영역의 radio button 클릭시 발생
+       * true or false 영역의 버튼이 채크 되었다면 채크를 해제하고 ignore 버튼을 채크
+       * ㅊcalcValue를 호출하여 value를 계산한다.
+       */
+      ignoreChecked: function() {
+        if(this.isTrue) {
+          this.isTrue = false;
+        } else if (this.isFalse) {
+          this.isFalse = false;
+        }
+
+        this.isIgnore = true;
+        this.calcValue(this.isTrue, this.isFalse, this.isIgnore);
+      },
+
+      /**
+       * true, false 버튼중 어느 것이 채크 되었는지 확인하고 둘다 채크 되지 않았을때 null로 초기화
+       */
+      calcValue: function(trueBtn, falseBtn, ignoreBtn) {
+        if(trueBtn) {
+          this.value = true;
+        } else if (falseBtn) {
+          this.value = false;
+        } else if (ignoreBtn) {
+          this.value = null;
+        }
+      }
+    })
+  </script>
 </dom-module>

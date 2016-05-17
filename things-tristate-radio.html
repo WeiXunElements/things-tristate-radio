@@ -13,11 +13,21 @@
 -->
 <dom-module is="things-tristate-radio">
   <style>
-    label {
+    :host{
+      color:var(--things-primary-text-color);
+      font-size:13px;
+    }
+    label{
       @apply(--things-label);
     }
+    input{
+      margin-left:15px;
+    }
+    label+input{
+      margin-left:0;
+    }
   </style>
-
+  
   <template>
     <label>[[label]]</label>
     <input type="radio" checked="[[isTrue]]" on-tap="trueChecked">yes

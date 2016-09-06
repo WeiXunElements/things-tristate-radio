@@ -96,9 +96,16 @@
        * 값이 변경되었을 경우 버튼 값 바인딩
        */
       _valueChanged: function(value) {
-        this.isTrue = value === true ? true : false;
-        this.isFalse = value === false ? true : false;
-        this.isIgnore = !this.isTrue && !this.isFalse; 
+        if((typeof value) == 'string') {
+          this.isTrue = (value && value.toLowerCase()[0] == 't') ? true : false;
+          this.isFalse = (value && value.toLowerCase()[0] != 't') ? true : false;
+
+        } else {
+          this.isTrue = (value === true) ? true : false;
+          this.isFalse = (value === false) ? true : false;
+        }
+
+        this.isIgnore = !this.isTrue && !this.isFalse;
       },
 
       /**

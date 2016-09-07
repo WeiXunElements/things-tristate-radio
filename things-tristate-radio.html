@@ -33,7 +33,7 @@
     <input type="radio" checked="[[isTrue]]" on-tap="trueChecked">yes
     <input type="radio" checked="[[isFalse]]" on-tap="falseChecked">no
     <template is="dom-if" if="[[showIgnore]]">
-    <input type="radio" checked="[[isIgnore]]" on-tap="ignoreChecked">ignore
+      <input type="radio" checked="[[isIgnore]]" on-tap="ignoreChecked">ignore
     </template>
     <input name="[[name]]" value="{{value}}" hidden>
   </template>
@@ -113,6 +113,7 @@
        */
       trueChecked: function() {
         this.value = true;
+        this.fire('things-tristate-radio-value-changed', 'yes');
       },
 
       /**
@@ -120,6 +121,7 @@
        */
       falseChecked: function() {
         this.value = false;
+        this.fire('things-tristate-radio-value-changed', 'no');
       },
 
       /**
@@ -127,6 +129,7 @@
        */
       ignoreChecked: function() {
         this.value = null;
+        this.fire('things-tristate-radio-value-changed', 'ignore');
       }
 
     })

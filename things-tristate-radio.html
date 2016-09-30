@@ -33,7 +33,7 @@
     <input type="radio" checked="[[isTrue]]" on-tap="trueChecked">[[yesMsg]]
     <input type="radio" checked="[[isFalse]]" on-tap="falseChecked">[[noMsg]]
     <template is="dom-if" if="[[showIgnore]]">
-      <input type="radio" checked="[[isIgnore]]" on-tap="ignoreChecked">[[ignoreMsg]]
+      <input type="radio" checked="[[isIgnore]]" on-tap="ignoreChecked">[[allMsg]]
     </template>
     <input name="[[name]]" value="{{value}}" hidden>
   </template>
@@ -101,9 +101,9 @@
           value: 'No'
         },
 
-        ignoreMsg: {
+        allMsg: {
           type: String,
-          value: 'Ignore'
+          value: 'All'
         }
       },
 

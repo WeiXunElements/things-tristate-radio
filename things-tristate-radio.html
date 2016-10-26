@@ -35,7 +35,7 @@
     <template is="dom-if" if="[[showIgnore]]">
       <input type="radio" checked="[[isIgnore]]" on-tap="ignoreChecked">[[allMsg]]
     </template>
-    <input name="[[name]]" value="{{value}}" hidden>
+    <input id="input" name="[[name]]" value="{{value}}" tabindex$="[[tabIndex]]" hidden>
   </template>
 
   <script>
@@ -104,6 +104,9 @@
         allMsg: {
           type: String,
           value: 'All'
+        },
+        tabIndex:{
+          type: String
         }
       },
 
@@ -145,7 +148,19 @@
       ignoreChecked: function() {
         this.value = null;
         this.fire('things-tristate-radio-value-changed', 'ignore');
-      }
+      },
+      /**
+       * focus
+       */
+      focus: function(){
+        this.$['input'].focus();
+      },
+      /**
+       * set tab index
+       */
+      setTabindex: function(tabIndex){
+        this.$['input'].setAtrribute('tabindex',tabIndex);
+      },
 
     })
   </script>

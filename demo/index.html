@@ -15,11 +15,11 @@ subject to an additional IP rights grant found at https://github.com/ThingsEleme
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
   <title>things-trisate-radio demo</title>
   <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
-
   <link rel="import" href="../../polymer/polymer.html">
-  <link rel="import" href="../../paper-button/papere-button.html">
-
-  <link rel="import" href="../things-trisate-radio.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../paper-button/paper-button.html">
+  <link rel="import" href="../things-tristate-radio.html">
 
   <style is="custom-style">
 
@@ -52,29 +52,24 @@ subject to an additional IP rights grant found at https://github.com/ThingsEleme
         max-height: 300px;
       };
     }
-
   </style>
-
 </head>
 
 <body unresolved>
   <demo-snippet class="centered-demo">
     <template>
-      <sample-tristate-radio></sample-tristate-radio>
+      <template is="dom-bind">
+        <things-tristate-radio
+          label="Are you sure?"
+          value="{{textconfirm}}">
+        </things-tristate-radio>
+        <br><br>
+        <div>
+          Result:"[[textconfirm]]"
+        </div>
+      </template>
 
-      <dom-module id="sample-tristate-radio">
-        <template>
-          <things-trisate-radio 
-            label="label">
-          </things-trisate-radio>
-        </template>
 
-        <script>
-          Polymer({
-            is: "sample-tristate-radio"
-          });
-        </script>
-      </dom-module>
     </template>
   </demo-snippet>
 

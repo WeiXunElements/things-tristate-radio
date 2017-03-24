@@ -1,6 +1,22 @@
 # things-tristate-radio
 
-An element providing a starting point for your own reusable Polymer elements.
+## yes혹은 no 데이터 선택하여 value값을 전달해준다.
+
+
+## Example:
+
+```html
+    <things-tristate-radio
+      value="{{textconfirm}}"
+      label="label">
+    </things-tristate-radio>
+    <div>
+      Result:"[[textconfirm]]"
+    </div>
+```
+
+*****
+</br></br>
 
 
 ## Dependencies
@@ -14,22 +30,17 @@ Then, go ahead and download the element's dependencies:
 
     bower install
 
-
 ## Playing With Your Element
 
 If you wish to work on your element in isolation, we recommend that you use
 [Polyserve](https://github.com/PolymerLabs/polyserve) to keep your element's
 bower dependencies in line. You can install it via:
 
-    npm install -g polyserve
+    npm install -g polymer-cli
 
 And you can run it via:
 
-    polyserve
+    polymer serve
 
 Once running, you can preview your element at
-`http://localhost:8080/components/things-tristate-radio/`, where `things-tristate-radio` is the name of the directory containing it.
-
-
-## Example 1. Things Tristate Radio
-`<things-tristate-radio>` Things Tristate Radio
+`http://localhost:8080/components/things-alarm/`, where `things-alarm` is the name of the directory containing it.

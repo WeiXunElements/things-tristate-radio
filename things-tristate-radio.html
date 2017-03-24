@@ -1,13 +1,18 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <!--
-`<things-tristate-radio>` Things Date Picker
+## things-tristate-radio
+`<things-tristate-radio>` Things yes혹은 no 데이터 선택하여 값을 전달해준다.
 
-  Example
-    
+###  Example
+
     <things-tristate-radio
+      value="{{textconfirm}}"
       label="label">
     </things-tristate-radio>
+    <div>
+      Result:"[[textconfirm]]"
+    </div>
 
 @demo demo/index.html
 -->
@@ -27,7 +32,7 @@
       margin-left:0;
     }
   </style>
-  
+
   <template>
     <label>[[label]]</label>
     <input type="radio" checked="[[isFalse]]" on-tap="falseChecked">[[noMsg]]
@@ -44,7 +49,9 @@
 
       properties: {
         /**
-         * label property
+         * label 프로퍼티
+         * *****
+         * @type {String}
          */
         label: {
           type: String
@@ -52,6 +59,8 @@
 
         /**
          * true 버튼 Checked 여부
+         * *****
+         * @type {Boolean}
          */
         isTrue: {
           type: Boolean,
@@ -60,6 +69,8 @@
 
         /**
          * false 버튼 Checked 여부
+         * *****
+         * @type {Boolean}
          */
         isFalse: {
           type: Boolean,
@@ -68,6 +79,8 @@
 
         /**
          * ignore 버튼 Checked 여부
+         * *****
+         * @type {Boolean}
          */
         isIgnore: {
           type: Boolean,
@@ -76,6 +89,8 @@
 
         /**
          * ignore 버튼 표시 여부
+         * ********
+         * @type {Boolean}
          */
         showIgnore: {
           type: Boolean,
@@ -84,27 +99,46 @@
 
         /**
          * radio 버튼의 값
+         * *****
+         * @type {Boolean}
          */
         value: {
           type: Boolean,
           notify: true,
           observer: '_valueChanged'
         },
-
+        /**
+         * value값을 yes로 설정
+         * *****
+         * @type {String}
+         */
         yesMsg: {
           type: String,
           value: 'Yes'
         },
-
+        /**
+         * value값을 no로 설정
+         * *****
+         * @type {String}
+         */
         noMsg: {
           type: String,
           value: 'No'
         },
-
+        /**
+         * value값을 all로 설정
+         * *****
+         * @type {String}
+         */
         allMsg: {
           type: String,
           value: 'All'
         },
+        /**
+         * tab입력시 커서 순서설정
+         * *****
+         * @type {String}
+         */
         tabIndex:{
           type: String
         }
@@ -112,6 +146,8 @@
 
       /**
        * 값이 변경되었을 경우 버튼 값 바인딩
+       * *****
+       * @param {value} value #### :radio value값 입력
        */
       _valueChanged: function(value) {
         if((typeof value) == 'string') {
@@ -128,6 +164,7 @@
 
       /**
        * true 버튼 클릭시
+       * ******
        */
       trueChecked: function() {
         this.value = true;
@@ -136,6 +173,7 @@
 
       /**
        * false 버튼 클릭시
+       * ******
        */
       falseChecked: function() {
         this.value = false;
@@ -144,6 +182,7 @@
 
       /**
        * ignore 버튼 클릭시
+       * *******
        */
       ignoreChecked: function() {
         this.value = null;
@@ -151,12 +190,14 @@
       },
       /**
        * focus
+       * *******
        */
       focus: function(){
         this.$['input'].focus();
       },
       /**
-       * set tab index
+       * tab index 설정
+       * ******
        */
       setTabindex: function(tabIndex){
         this.$['input'].setAtrribute('tabindex',tabIndex);

@@ -1,6 +1,6 @@
 # things-tristate-radio
 
-## yes혹은 no 데이터 선택하여 value값을 전달해준다.
+## Select yes or no data to pass the value.
 
 
 ## Example:
@@ -15,7 +15,7 @@
     </div>
 ```
 
-`things-tristate-radio-value-changed` event발생
+Fire `things-tristate-radio-value-changed` event
 
 
 *****
@@ -24,8 +24,7 @@
 
 ## Dependencies
 
-Element dependencies are managed via [Bower](http://bower.io/). You can
-install that via:
+Element dependencies are managed via [Bower](http://bower.io/). You can install that via:
 
     npm install -g bower
 

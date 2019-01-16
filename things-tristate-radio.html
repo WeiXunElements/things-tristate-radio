@@ -118,7 +118,9 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         yesMsg: {
           type: String,
-          value: 'Yes'
+          value: function() {
+            return Things.DataGlobal.t('label.Yes');
+          }
         },
         /**
          * value값을 no로 설정
@@ -127,7 +129,9 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         noMsg: {
           type: String,
-          value: 'No'
+          value: function() {
+            return Things.DataGlobal.t('label.No');
+          }
         },
         /**
          * value값을 all로 설정
@@ -136,7 +140,9 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         allMsg: {
           type: String,
-          value: 'All'
+          value: function() {
+            return Things.DataGlobal.t('label.All');
+          }
         },
         /**
          * tab입력시 커서 순서설정
